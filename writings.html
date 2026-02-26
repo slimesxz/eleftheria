@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Writings — Eleftheria</title>
+<meta name="description" content="Essays and writings by Eleftheria on consciousness, media, and the architecture of self.">
+<link rel="stylesheet" href="style.css">
+<style>
+  .writings-header {
+    padding-bottom: 3rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 3rem;
+  }
+
+  .writings-list {
+    display: flex; flex-direction: column; gap: 0;
+  }
+
+  .writing-item {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    gap: 2rem; align-items: center;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--border);
+    text-decoration: none; color: var(--white);
+    transition: background 0.2s;
+    cursor: pointer;
+  }
+
+  .writing-item:hover { background: rgba(255,255,255,0.02); }
+  .writing-item:hover .writing-arrow { opacity: 1; transform: translateX(4px); }
+
+  .writing-num {
+    font-size: 0.55rem; letter-spacing: 0.2em;
+    color: var(--dim); text-transform: uppercase;
+    font-family: 'Space Mono', monospace;
+  }
+
+  .writing-info {}
+
+  .writing-title {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 0.9rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.05em;
+    margin-bottom: 0.4rem;
+  }
+
+  .writing-sub {
+    font-size: 0.62rem; color: var(--dim);
+    letter-spacing: 0.06em;
+  }
+
+  .writing-arrow {
+    font-size: 1.2rem; color: var(--dim);
+    opacity: 0; transition: opacity 0.2s, transform 0.2s;
+  }
+
+  /* Substack CTA */
+  .substack-cta {
+    margin-top: 4rem;
+    padding: 3rem;
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 2rem;
+    position: relative; overflow: hidden;
+  }
+
+  .substack-cta::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #27ae60, #2980b9, #c0392b, #e67e22);
+  }
+
+  .substack-text h3 {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 1rem; font-weight: 700;
+    text-transform: uppercase; margin-bottom: 0.5rem;
+  }
+
+  .substack-text p {
+    font-size: 0.68rem; color: var(--dim);
+    letter-spacing: 0.04em; line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+
+<div class="ambient-red"></div>
+<div class="ambient-green"></div>
+<div class="ambient-blue"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">Eleftheria</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="book.html">Book</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="writings.html" class="active">Writings</a></li>
+    <li><a href="deepdive.html">Deep Dive</a></li>
+  </ul>
+  <button class="nav-mobile-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')">☰</button>
+</nav>
+
+<div class="spectrum"></div>
+
+<main>
+  <div class="writings-header">
+    <div class="eyebrow fade-up">Essays & Writing</div>
+    <h1 class="fade-up fade-up-1">Writings</h1>
+  </div>
+
+  <div class="writings-list fade-up fade-up-2">
+    <a href="https://substack.com/@unconditionalliberty" class="writing-item" target="_blank">
+      <div class="writing-num">01</div>
+      <div class="writing-info">
+        <div class="writing-title">Maximum Unity</div>
+        <div class="writing-sub">Substack · Essay Series</div>
+      </div>
+      <div class="writing-arrow">›</div>
+    </a>
+
+    <a href="https://substack.com/@unconditionalliberty" class="writing-item" target="_blank">
+      <div class="writing-num">02</div>
+      <div class="writing-info">
+        <div class="writing-title">Consciousness as Media</div>
+        <div class="writing-sub">Substack · Essay</div>
+      </div>
+      <div class="writing-arrow">›</div>
+    </a>
+
+    <a href="https://substack.com/@unconditionalliberty" class="writing-item" target="_blank">
+      <div class="writing-num">03</div>
+      <div class="writing-info">
+        <div class="writing-title">The Neon Particle</div>
+        <div class="writing-sub">Substack · Essay</div>
+      </div>
+      <div class="writing-arrow">›</div>
+    </a>
+
+    <a href="https://substack.com/@unconditionalliberty" class="writing-item" target="_blank">
+      <div class="writing-num">04</div>
+      <div class="writing-info">
+        <div class="writing-title">High Places</div>
+        <div class="writing-sub">Substack · Essay</div>
+      </div>
+      <div class="writing-arrow">›</div>
+    </a>
+  </div>
+
+  <div class="substack-cta fade-up fade-up-3">
+    <div class="substack-text">
+      <h3>Maximum Unity on Substack</h3>
+      <p>All essays, dispatches, and longform research. Updated continuously.</p>
+    </div>
+    <div class="btn-group" style="min-width:220px;">
+      <a href="https://substack.com/@unconditionalliberty" class="btn" target="_blank">View More <span class="btn-arrow">›</span></a>
+    </div>
+  </div>
+</main>
+
+<div class="spectrum"></div>
+
+<footer>
+  <span class="footer-copy">© 2025 Eleftheria. All rights reserved.</span>
+  <ul class="footer-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="book.html">Book</a></li>
+    <li><a href="deepdive.html">Deep Dive</a></li>
+    <li><a href="mailto:hello@eleftheria.com">Email</a></li>
+  </ul>
+</footer>
+
+</body>
+</html>

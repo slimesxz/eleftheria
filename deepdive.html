@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deep Dive — Eleftheria</title>
+<meta name="description" content="What Is The Metric Of The Self? A NotebookLM Deep Dive by Eleftheria.">
+<link rel="stylesheet" href="style.css">
+<style>
+  .deepdive-header {
+    padding-bottom: 3rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 4rem;
+  }
+
+  /* Player */
+  .player-label {
+    font-size: 0.6rem; letter-spacing: 0.22em;
+    color: var(--dim); text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .audio-wrapper {
+    border: 1px solid var(--border);
+    padding: 2rem 2.5rem;
+    background: rgba(255,255,255,0.015);
+    position: relative; overflow: hidden;
+    margin-bottom: 1px;
+  }
+
+  .audio-wrapper::before {
+    content: '';
+    position: absolute; top: 0; left: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, #27ae60 0%, #2980b9 50%, #c0392b 100%);
+  }
+
+  .audio-inner {
+    display: flex; align-items: center; gap: 2rem;
+  }
+
+  .play-btn {
+    width: 52px; height: 52px; flex-shrink: 0;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: background 0.2s, border-color 0.2s;
+    text-decoration: none;
+  }
+  .play-btn:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.6);
+  }
+  .play-btn svg { margin-left: 3px; }
+
+  .audio-meta { flex: 1; }
+
+  .audio-title-text {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 0.8rem; font-weight: 400;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    margin-bottom: 0.35rem;
+  }
+
+  .audio-sub-text {
+    font-size: 0.6rem; color: var(--dim);
+    letter-spacing: 0.1em; text-transform: uppercase;
+  }
+
+  .waveform {
+    display: flex; align-items: center; gap: 3px; height: 28px;
+  }
+  .waveform span {
+    display: block; width: 2px;
+    background: rgba(255,255,255,0.25); border-radius: 1px;
+    animation: wave 1.6s ease-in-out infinite;
+  }
+  .waveform span:nth-child(1)  { height: 6px;  animation-delay: 0.0s; }
+  .waveform span:nth-child(2)  { height: 14px; animation-delay: 0.1s; }
+  .waveform span:nth-child(3)  { height: 9px;  animation-delay: 0.2s; }
+  .waveform span:nth-child(4)  { height: 20px; animation-delay: 0.15s; }
+  .waveform span:nth-child(5)  { height: 7px;  animation-delay: 0.3s; }
+  .waveform span:nth-child(6)  { height: 22px; animation-delay: 0.05s; }
+  .waveform span:nth-child(7)  { height: 12px; animation-delay: 0.25s; }
+  .waveform span:nth-child(8)  { height: 17px; animation-delay: 0.1s; }
+  .waveform span:nth-child(9)  { height: 5px;  animation-delay: 0.35s; }
+  .waveform span:nth-child(10) { height: 15px; animation-delay: 0.2s; }
+  .waveform span:nth-child(11) { height: 10px; animation-delay: 0.0s; }
+  .waveform span:nth-child(12) { height: 19px; animation-delay: 0.15s; }
+
+  @keyframes wave {
+    0%, 100% { transform: scaleY(1); opacity: 0.25; }
+    50% { transform: scaleY(1.9); opacity: 0.7; }
+  }
+
+  /* Description */
+  .description-block {
+    border-left: 1px solid var(--border);
+    padding-left: 2rem;
+    margin: 3.5rem 0;
+  }
+
+  .description-block p {
+    font-size: 0.78rem; line-height: 1.9;
+    color: rgba(255,255,255,0.65); letter-spacing: 0.02em;
+    max-width: 580px;
+  }
+  .description-block p + p { margin-top: 1rem; }
+
+  /* Meta */
+  .meta-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: var(--border);
+    margin: 3rem 0;
+  }
+  .meta-cell {
+    background: var(--black); padding: 1.5rem 2rem;
+  }
+  .meta-label {
+    font-size: 0.52rem; letter-spacing: 0.22em;
+    color: var(--dim); text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .meta-value {
+    font-size: 0.72rem; letter-spacing: 0.04em;
+  }
+
+  @media (max-width: 680px) {
+    .audio-inner { flex-wrap: wrap; }
+    .waveform { display: none; }
+    .meta-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="ambient-red"></div>
+<div class="ambient-green"></div>
+<div class="ambient-blue"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">Eleftheria</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="book.html">Book</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="writings.html">Writings</a></li>
+    <li><a href="deepdive.html" class="active">Deep Dive</a></li>
+  </ul>
+  <button class="nav-mobile-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')">☰</button>
+</nav>
+
+<div class="spectrum"></div>
+
+<main>
+
+  <div class="deepdive-header">
+    <div class="eyebrow fade-up">Deep Dive with NotebookLM</div>
+    <h1 class="fade-up fade-up-1" style="max-width:700px; line-height:1.05;">
+      What Is The Metric<br>Of The Self?
+    </h1>
+  </div>
+
+  <!-- AUDIO PLAYER -->
+  <div class="fade-up fade-up-2">
+    <div class="player-label">Audio — Deep Dive</div>
+    <div class="audio-wrapper">
+      <div class="audio-inner">
+        <a href="YOUR_AUDIO_URL_HERE" class="play-btn" target="_blank">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="white">
+            <path d="M3 2l13 7-13 7V2z"/>
+          </svg>
+        </a>
+        <div class="audio-meta">
+          <div class="audio-title-text">What Is The Metric Of The Self?</div>
+          <div class="audio-sub-text">NotebookLM Deep Dive · Harvard Extension School · 2025</div>
+        </div>
+        <div class="waveform">
+          <span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DESCRIPTION -->
+  <div class="description-block fade-up fade-up-3">
+    <p>
+      This Deep Dive was generated using NotebookLM Pro as part of original research
+      into a mathematical framework for measuring the coherence of the self — the Orixiam.
+      The work synthesizes interdisciplinary sources across consciousness science,
+      predictive inference, and celestial mechanics.
+    </p>
+    <p>
+      Presented for Harvard Extension School, PSYC E-1609: Sleep & Mental Health, 2025.
+      The underlying derivation is available in The Missing Variable.
+    </p>
+  </div>
+
+  <!-- META -->
+  <div class="meta-grid fade-up fade-up-3">
+    <div class="meta-cell">
+      <div class="meta-label">Tool</div>
+      <div class="meta-value">NotebookLM Pro</div>
+    </div>
+    <div class="meta-cell">
+      <div class="meta-label">Year</div>
+      <div class="meta-value">2025</div>
+    </div>
+    <div class="meta-cell">
+      <div class="meta-label">Context</div>
+      <div class="meta-value">Harvard Extension School</div>
+    </div>
+  </div>
+
+  <!-- BUTTONS -->
+  <div class="btn-group fade-up fade-up-4">
+    <a href="YOUR_NOTEBOOKLM_LINK" class="btn" target="_blank">Open in NotebookLM <span class="btn-arrow">›</span></a>
+    <a href="https://youtu.be/Zj6qcDVdzeo" class="btn" target="_blank">Watch The Missing Variable on YouTube <span class="btn-arrow">›</span></a>
+    <a href="https://www.dropbox.com/scl/fi/li3m56jgqc3wrv79kcr9d/The_Missing-Variable.txt?rlkey=9pgbwjh1wg7vwm7oov5fn110t&st=qag4meum&dl=0" class="btn" target="_blank">Read The Derivation (PDF) <span class="btn-arrow">›</span></a>
+    <a href="index.html" class="btn">Return to Eleftheria.com <span class="btn-arrow">›</span></a>
+  </div>
+
+</main>
+
+<div class="spectrum"></div>
+
+<footer>
+  <span class="footer-copy">© 2025 Eleftheria. All rights reserved.</span>
+  <ul class="footer-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="book.html">Book</a></li>
+    <li><a href="writings.html">Writings</a></li>
+    <li><a href="mailto:hello@eleftheria.com">Email</a></li>
+  </ul>
+</footer>
+
+</body>
+</html>
