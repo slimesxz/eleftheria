@@ -7,31 +7,112 @@
 <meta name="description" content="Eleftheria — Photography Book. Available in hardcover and digital editions.">
 <link rel="stylesheet" href="style.css">
 <style>
-  .book-hero {
+  .book-layout {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 6rem;
-    align-items: start;
-    margin-top: 3rem;
+    min-height: calc(100vh - 60px);
+    gap: 0;
   }
 
-  .book-cover-img {
+  /* Left: full-bleed book cover */
+  .book-visual {
+    position: relative;
+    overflow: hidden;
+    min-height: 600px;
+  }
+
+  .book-visual img {
     width: 100%;
+    height: 100%;
+    object-fit: cover;
     display: block;
-    border: 1px solid var(--border);
+    filter: brightness(0.85);
+    transition: filter 0.6s ease;
+  }
+
+  .book-visual:hover img {
+    filter: brightness(1);
+  }
+
+  /* Gradient fade on right edge blending into info panel */
+  .book-visual::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 120px; height: 100%;
+    background: linear-gradient(90deg, transparent, #000);
+    pointer-events: none;
+  }
+
+  /* Right: info panel */
+  .book-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 5rem 4rem;
+    position: relative;
+  }
+
+  .book-info::before {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 1px; height: 100%;
+    background: var(--border);
+  }
+
+  .book-edition {
+    font-size: 0.55rem; letter-spacing: 0.3em;
+    color: var(--dim); text-transform: uppercase;
+    margin-bottom: 3rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+
+  .book-edition::after {
+    content: ''; flex: 1; height: 1px;
+    background: var(--border); max-width: 60px;
+  }
+
+  .book-tagline {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+    font-weight: 700; text-transform: uppercase;
+    letter-spacing: -0.01em; line-height: 1.1;
+    margin-bottom: 2rem;
   }
 
   .book-desc {
     font-size: 0.75rem; line-height: 1.9;
-    color: rgba(255,255,255,0.65);
+    color: rgba(255,255,255,0.55);
     border-left: 1px solid var(--border);
     padding-left: 1.5rem;
     margin-bottom: 3rem;
     letter-spacing: 0.02em;
+    max-width: 340px;
   }
 
-  @media (max-width: 680px) {
-    .book-hero { grid-template-columns: 1fr; gap: 3rem; }
+  .book-meta {
+    display: flex; gap: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  .book-meta-item {}
+
+  .book-meta-label {
+    font-size: 0.5rem; letter-spacing: 0.2em;
+    color: var(--dim); text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+
+  .book-meta-value {
+    font-size: 0.7rem; letter-spacing: 0.05em;
+  }
+
+  @media (max-width: 768px) {
+    .book-layout { grid-template-columns: 1fr; min-height: auto; }
+    .book-visual { min-height: 50vh; }
+    .book-visual::after { display: none; }
+    .book-info { padding: 3rem 1.5rem; }
+    .book-info::before { display: none; }
   }
 </style>
 </head>
@@ -54,31 +135,39 @@
 
 <div class="spectrum"></div>
 
-<main>
+<div class="book-layout">
 
-  <div class="eyebrow fade-up">Photography</div>
-  <h1 class="fade-up fade-up-1">Eleftheria</h1>
+  <div class="book-visual fade-up">
+    <img src="book-cover.png" alt="Eleftheria Photography Book" />
+  </div>
 
-  <div class="book-hero">
-    <div class="fade-up fade-up-2">
-      <img
-        src="book-cover.png"
-        alt="Eleftheria — Photography Book"
-        class="book-cover-img"
-      />
-    </div>
-    <div class="fade-up fade-up-3">
-      <p class="book-desc">
-        A photography book. Hardcover and digital editions available.
-      </p>
-      <div class="btn-group">
-        <a href="https://buy.stripe.com/6oU14ocny7Wq9Sm4zJ1ck02" class="btn" target="_blank">Order Hardcover <span class="btn-arrow">›</span></a>
-        <a href="https://buy.stripe.com/7sY8wQfzK6Sm9Sm1nx1ck00" class="btn" target="_blank">Get the Digital <span class="btn-arrow">›</span></a>
+  <div class="book-info fade-up fade-up-2">
+    <div class="book-edition">Photography · Limited Edition</div>
+
+    <div class="book-tagline">A Book<br>About Being<br>Here.</div>
+
+    <p class="book-desc">
+      Hardcover and digital editions available. A visual record — light, place, and the architecture of presence.
+    </p>
+
+    <div class="book-meta">
+      <div class="book-meta-item">
+        <div class="book-meta-label">Format</div>
+        <div class="book-meta-value">Hardcover</div>
       </div>
+      <div class="book-meta-item">
+        <div class="book-meta-label">Also Available</div>
+        <div class="book-meta-value">Digital</div>
+      </div>
+    </div>
+
+    <div class="btn-group" style="max-width: 360px;">
+      <a href="https://buy.stripe.com/6oU14ocny7Wq9Sm4zJ1ck02" class="btn" target="_blank">Order Hardcover <span class="btn-arrow">›</span></a>
+      <a href="https://buy.stripe.com/7sY8wQfzK6Sm9Sm1nx1ck00" class="btn" target="_blank">Get the Digital <span class="btn-arrow">›</span></a>
     </div>
   </div>
 
-</main>
+</div>
 
 <div class="spectrum"></div>
 
