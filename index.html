@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eleftheria</title>
+<meta name="description" content="Founder of UIS. Director of DoomAcid. President of The Eye And The Prize.">
+<link rel="stylesheet" href="style.css">
+<style>
+  /* ── HERO ── */
+  .hero {
+    min-height: 92vh;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding-bottom: 5rem;
+    position: relative;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    overflow: hidden;
+  }
+
+  .streak {
+    position: absolute; top: -10%; bottom: -10%;
+    width: 1px; opacity: 0.18;
+    animation: streakPulse 6s ease-in-out infinite;
+  }
+  .streak-1 { left: 15%; background: linear-gradient(180deg, transparent, #27ae60, transparent); animation-delay: 0s; }
+  .streak-2 { left: 28%; background: linear-gradient(180deg, transparent, #2980b9, transparent); animation-delay: 1.2s; }
+  .streak-3 { left: 42%; background: linear-gradient(180deg, transparent, #27ae60, transparent); animation-delay: 0.6s; width: 2px; opacity: 0.08; }
+  .streak-4 { left: 60%; background: linear-gradient(180deg, transparent, #c0392b, transparent); animation-delay: 2s; }
+  .streak-5 { left: 74%; background: linear-gradient(180deg, transparent, #e67e22, transparent); animation-delay: 0.4s; }
+  .streak-6 { left: 88%; background: linear-gradient(180deg, transparent, #c0392b, transparent); animation-delay: 1.8s; }
+
+  @keyframes streakPulse {
+    0%, 100% { opacity: 0.06; }
+    50% { opacity: 0.22; }
+  }
+
+  .hero-content {
+    position: relative; z-index: 1;
+    padding: 0 3rem;
+  }
+
+  .hero-name {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(3.5rem, 10vw, 8rem);
+    font-weight: 700; line-height: 0.95;
+    text-transform: uppercase; letter-spacing: -0.03em;
+    margin-bottom: 2rem;
+  }
+
+  .hero-name span {
+    display: block; font-weight: 300;
+    font-size: 0.18em; letter-spacing: 0.35em;
+    color: var(--dim); margin-bottom: 1.2rem;
+    text-transform: uppercase;
+  }
+
+  .hero-bio {
+    font-size: 0.75rem; line-height: 1.9;
+    color: rgba(255,255,255,0.65);
+    max-width: 560px; letter-spacing: 0.02em;
+    border-left: 1px solid var(--border);
+    padding-left: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .hero-nav {
+    display: flex; gap: 0; flex-wrap: wrap;
+  }
+
+  .hero-nav-link {
+    font-size: 0.65rem; letter-spacing: 0.18em;
+    text-transform: uppercase; text-decoration: none;
+    color: var(--dim);
+    padding: 0.8rem 1.5rem;
+    border: 1px solid var(--border);
+    border-right: none;
+    transition: background 0.2s, color 0.2s;
+  }
+  .hero-nav-link:last-child { border-right: 1px solid var(--border); }
+  .hero-nav-link:hover { background: rgba(255,255,255,0.05); color: var(--white); }
+
+  /* ── WORKS GRID ── */
+  .works {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1px; background: var(--border);
+    margin: 6rem 3rem;
+  }
+
+  .work-item {
+    background: var(--black); padding: 3rem 2.5rem;
+    position: relative; overflow: hidden;
+    transition: background 0.3s;
+    text-decoration: none; color: var(--white);
+    display: block;
+  }
+  .work-item:hover { background: rgba(255,255,255,0.025); }
+
+  .work-item::before {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 2px; height: 0;
+    transition: height 0.4s ease;
+  }
+  .work-item:nth-child(1)::before { background: #27ae60; }
+  .work-item:nth-child(2)::before { background: #2980b9; }
+  .work-item:nth-child(3)::before { background: #c0392b; }
+  .work-item:nth-child(4)::before { background: #e67e22; }
+  .work-item:hover::before { height: 100%; }
+
+  .work-num {
+    font-size: 0.55rem; letter-spacing: 0.2em;
+    color: var(--dim); margin-bottom: 2rem;
+  }
+
+  .work-title {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 1rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.05em;
+    margin-bottom: 0.8rem; line-height: 1.2;
+  }
+
+  .work-desc {
+    font-size: 0.65rem; line-height: 1.7;
+    color: var(--dim); letter-spacing: 0.02em;
+    margin-bottom: 2rem;
+  }
+
+  .work-link-label {
+    font-size: 0.6rem; letter-spacing: 0.15em;
+    color: var(--dim); text-transform: uppercase;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .work-link-label::after { content: '›'; font-size: 1rem; }
+
+  /* ── ABOUT scroll fix ── */
+  #about {
+    scroll-margin-top: 140px;
+  }
+
+  /* ── CONSTELLATION ── */
+  .constellation {
+    padding: 0 3rem 6rem;
+  }
+
+  .constellation-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: var(--border);
+    margin-top: 2rem;
+  }
+
+  .constellation-item {
+    background: var(--black); padding: 2rem;
+    text-decoration: none; color: var(--white);
+    transition: background 0.2s;
+    display: flex; flex-direction: column; gap: 0.5rem;
+  }
+  .constellation-item:hover { background: rgba(255,255,255,0.03); }
+
+  .constellation-symbol { font-size: 1.2rem; margin-bottom: 0.5rem; opacity: 0.5; }
+
+  .constellation-name {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 0.75rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.08em;
+  }
+
+  .constellation-role {
+    font-size: 0.6rem; letter-spacing: 0.1em;
+    color: var(--dim); text-transform: uppercase;
+  }
+
+  @media (max-width: 680px) {
+    .hero-content { padding: 0 1.5rem; }
+    .works { margin: 4rem 1.5rem; grid-template-columns: 1fr; }
+    .constellation { padding: 0 1.5rem 4rem; }
+    .constellation-grid { grid-template-columns: 1fr; }
+    .hero-nav-link { padding: 0.7rem 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="ambient-red"></div>
+<div class="ambient-green"></div>
+<div class="ambient-blue"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">Eleftheria</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="book.html">Book</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="writings.html">Writings</a></li>
+    <li><a href="deepdive.html">Deep Dive</a></li>
+  </ul>
+  <button class="nav-mobile-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')">☰</button>
+</nav>
+
+<div class="spectrum"></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="streak streak-1"></div>
+    <div class="streak streak-2"></div>
+    <div class="streak streak-3"></div>
+    <div class="streak streak-4"></div>
+    <div class="streak streak-5"></div>
+    <div class="streak streak-6"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-name fade-up fade-up-1">
+      <span>Founder · Director · Producer</span>
+      Eleftheria
+    </div>
+    <p class="hero-bio fade-up fade-up-2">
+      Founder of UIS. Director and Producer of DoomAcid.
+      President of The Eye And The Prize. Developer of frameworks
+      that treat consciousness as a structured, measurable, and
+      transmissible information process.
+    </p>
+    <nav class="hero-nav fade-up fade-up-3">
+      <a href="book.html" class="hero-nav-link">Book</a>
+      <a href="index.html#about" class="hero-nav-link">About</a>
+      <a href="writings.html" class="hero-nav-link">Writings</a>
+      <a href="deepdive.html" class="hero-nav-link">Deep Dive</a>
+      <a href="/cdn-cgi/l/email-protection#f9919c959596b99c959c9f8d919c8b9098d79a9694" class="hero-nav-link">Email</a>
+    </nav>
+  </div>
+</section>
+
+<div class="spectrum"></div>
+
+<!-- WORKS -->
+<section class="works fade-up fade-up-2">
+  <a href="deepdive.html" class="work-item">
+    <div class="work-num">01 — Research</div>
+    <div class="work-title">The Missing Variable</div>
+    <div class="work-desc">A derivation of the mathematical metric for the coherence of the self. Video, PDF, and Deep Dive audio.</div>
+    <div class="work-link-label">Watch & Read</div>
+  </a>
+  <a href="book.html" class="work-item">
+    <div class="work-num">02 — Photography</div>
+    <div class="work-title">Eleftheria</div>
+    <div class="work-desc">A photography book. Available in hardcover and digital editions.</div>
+    <div class="work-link-label">Order Now</div>
+  </a>
+  <a href="https://substack.com/@unconditionalliberty" class="work-item" target="_blank">
+    <div class="work-num">03 — Writing</div>
+    <div class="work-title">Maximum Unity</div>
+    <div class="work-desc">Essays on consciousness, media, and the architecture of self. Published on Substack.</div>
+    <div class="work-link-label">Read</div>
+  </a>
+  <a href="index.html#about" class="work-item">
+    <div class="work-num">04 — Studio</div>
+    <div class="work-title">DoomAcid</div>
+    <div class="work-desc">The flagship production of The Eye And The Prize. A post-cinematic ecosystem designed to engineer the dream.</div>
+    <div class="work-link-label">Learn More</div>
+  </a>
+</section>
+
+<!-- ABOUT -->
+<section id="about" style="padding: 0 3rem 6rem; position: relative; z-index: 1;">
+  <div class="eyebrow fade-up">About</div>
+  <h2 class="fade-up fade-up-1" style="max-width:700px; line-height:1.2; margin-bottom:2.5rem;">
+    Eleftheria is the founder of UIS, the Director and Producer of the acclaimed DoomAcid project, and serves as the President of The Eye And The Prize.
+  </h2>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:3rem; max-width:800px;" class="fade-up fade-up-2">
+    <p style="font-size:0.75rem; line-height:1.9; color:rgba(255,255,255,0.65); letter-spacing:0.02em;">
+      She develops frameworks that treat consciousness as a structured, measurable, and transmissible information process. Through UIS, she formulates first-principles models that investigate coherence, identity, and the physics of self-referential cognition.
+    </p>
+    <p style="font-size:0.75rem; line-height:1.9; color:rgba(255,255,255,0.65); letter-spacing:0.02em;">
+      As president of TEATP, she applies this research to create post-cinematic formats, executable narratives, and cognitive technologies that explore the interaction between human perception, computation, and story.
+    </p>
+  </div>
+  <div style="margin-top:2.5rem;" class="fade-up fade-up-3">
+    <div class="btn-group" style="max-width:400px;">
+      <a href="/cdn-cgi/l/email-protection#660e030a0a0926030a0300120e03140f074805090b" class="btn">Email Eleftheria <span class="btn-arrow">›</span></a>
+      <a href="https://www.linkedin.com/in/libertytsitos/" class="btn" target="_blank">LinkedIn <span class="btn-arrow">›</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- CONSTELLATION -->
+<section class="constellation">
+  <div class="section-rule"></div>
+  <div class="eyebrow">Constellation ❂</div>
+  <div class="constellation-grid fade-up fade-up-1">
+    <a href="https://substack.com/@unconditionalliberty" class="constellation-item" target="_blank">
+      <div class="constellation-symbol">✦</div>
+      <div class="constellation-name">Maximum Unity</div>
+      <div class="constellation-role">Writing & Research</div>
+    </a>
+    <a href="https://theeyeandtheprize.com" class="constellation-item" target="_blank">
+      <div class="constellation-symbol">◎</div>
+      <div class="constellation-name">The Eye And The Prize</div>
+      <div class="constellation-role">Creative Studio</div>
+    </a>
+    <a href="http://doomacid.com" class="constellation-item" target="_blank">
+      <div class="constellation-symbol">◈</div>
+      <div class="constellation-name">DoomAcid</div>
+      <div class="constellation-role">Post-Cinematic Project</div>
+    </a>
+  </div>
+</section>
+
+<div class="spectrum"></div>
+
+<footer>
+  <span class="footer-copy">&copy; 2026 Eleftheria. All rights reserved.</span>
+  <ul class="footer-links">
+    <li><a href="book.html">Book</a></li>
+    <li><a href="writings.html">Writings</a></li>
+    <li><a href="deepdive.html">Deep Dive</a></li>
+    <li><a href="mailto:hello@eleftheria.com">Email</a></li>
+  </ul>
+</footer>
+
+</body>
+</html>
