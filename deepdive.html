@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deep Dive — Eleftheria</title>
+<meta name="description" content="What Is The Metric Of The Self? A research presentation in audio using NotebookLM.">
+
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="120x120" href="apple-touch-icon-120x120.png">
+<meta name="theme-color" content="#000000">
+<link rel="stylesheet" href="style.css">
+<style>
+  .video-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    background: #0a0a0a;
+    margin-bottom: 3rem;
+  }
+
+  .video-wrapper iframe {
+    width: 100%; height: 100%;
+    border: none; display: block;
+  }
+
+  .audio-wrapper {
+    border: 1px solid var(--border);
+    padding: 1.5rem 2rem;
+    background: rgba(255,255,255,0.02);
+    position: relative; overflow: hidden;
+    margin-bottom: 3rem;
+  }
+
+  .audio-wrapper::before {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: linear-gradient(180deg, #27ae60, #2980b9, #c0392b);
+  }
+
+  .audio-title-row {
+    font-size: 0.75rem; letter-spacing: 0.05em;
+    margin-bottom: 0.4rem;
+    color: rgba(255,255,255,0.8);
+  }
+
+  .audio-sub {
+    font-size: 0.6rem; color: var(--dim);
+    letter-spacing: 0.08em; margin-bottom: 1rem;
+  }
+
+  audio { width: 100%; margin-top: 0.5rem; }
+
+  .meta {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: var(--border);
+    margin: 3rem 0;
+  }
+
+  .meta-item {
+    background: var(--black); padding: 1.5rem;
+  }
+
+  .meta-label {
+    font-size: 0.55rem; letter-spacing: 0.2em;
+    color: var(--dim); text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .meta-value { font-size: 0.75rem; letter-spacing: 0.05em; }
+
+  .description {
+    border-left: 1px solid var(--border);
+    padding-left: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .description p {
+    font-size: 0.8rem; line-height: 1.8;
+    color: rgba(255,255,255,0.75);
+    letter-spacing: 0.02em; max-width: 600px;
+  }
+  .description p + p { margin-top: 1rem; }
+
+  @media (max-width: 680px) {
+    .meta { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="ambient-red"></div>
+<div class="ambient-green"></div>
+<div class="ambient-blue"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">Eleftheria</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="book.html">Book</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="writings.html">Writings</a></li>
+    <li><a href="deepdive.html" class="active">Deep Dive</a></li>
+  </ul>
+  <button class="nav-mobile-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')">☰</button>
+</nav>
+
+<div class="spectrum"></div>
+
+<main>
+
+  <div class="eyebrow fade-up">Deep Dive with NotebookLM</div>
+
+  <h1 class="fade-up fade-up-1">
+    What Is The Metric<br>Of The Self?
+  </h1>
+  <p style="font-size:0.75rem; color:var(--dim); letter-spacing:0.1em; text-transform:uppercase; margin: 0.5rem 0 3rem;" class="fade-up fade-up-2">A research presentation in audio</p>
+
+  <!-- VIDEO -->
+  <div class="fade-up fade-up-2">
+    <div class="eyebrow">Film — The Missing Variable</div>
+    <div class="video-wrapper">
+      <iframe
+        src="https://www.youtube.com/embed/Zj6qcDVdzeo"
+        title="The Missing Variable"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+
+  <!-- AUDIO -->
+  <div class="fade-up fade-up-3">
+    <div class="eyebrow">Audio — Deep Dive</div>
+    <div class="audio-wrapper">
+      <div class="audio-title-row">What Is The Metric Of The Self?</div>
+      <div class="audio-sub">NotebookLM Deep Dive · 2025</div>
+      <iframe
+        width="100%"
+        height="166"
+        scrolling="no"
+        frameborder="no"
+        allow="autoplay"
+        src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/user-460186605/calculating-the-self-the&color=%2327ae60&auto_play=false&show_user=false&show_artwork=false&visual=false&buying=false&sharing=false&download=false&show_comments=false&show_playcount=false&background_color=%23000000"
+        style="margin-top:1rem; display:block; background:#000; border-radius:0; filter:invert(1) hue-rotate(180deg);">
+      </iframe>
+    </div>
+  </div>
+
+  <!-- DESCRIPTION -->
+  <div class="description fade-up fade-up-3">
+    <p>
+      This Deep Dive was generated using NotebookLM Pro as part of original research into a
+      mathematical framework for measuring the coherence of the self — the Orixiam. The work
+      synthesizes interdisciplinary sources across consciousness science, predictive inference,
+      and celestial mechanics.
+    </p>
+    <p>
+      Presented for Harvard Extension School, PSYC E-1609: Sleep & Mental Health, 2025.
+      The underlying derivation is available in The Missing Variable.
+    </p>
+  </div>
+
+  <!-- META -->
+  <div class="meta fade-up fade-up-4">
+    <div class="meta-item">
+      <div class="meta-label">Tool</div>
+      <div class="meta-value">NotebookLM Pro</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Year</div>
+      <div class="meta-value">2025</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Context</div>
+      <div class="meta-value">Harvard Extension School</div>
+    </div>
+  </div>
+
+  <!-- BUTTONS -->
+  <div class="btn-group fade-up fade-up-4">
+    <a href="https://notebooklm.google.com/notebook/901e4164-543c-42f0-b225-e2100c1b59ff?artifactId=273ab19d-3056-4d67-bb2e-0f9fa2eb8033" class="btn" target="_blank">
+      Open in NotebookLM <span class="btn-arrow">›</span>
+    </a>
+    <a href="https://youtu.be/Zj6qcDVdzeo" class="btn" target="_blank">
+      Watch on YouTube <span class="btn-arrow">›</span>
+    </a>
+    <a href="https://www.dropbox.com/scl/fi/li3m56jgqc3wrv79kcr9d/The_Missing-Variable.txt?rlkey=9pgbwjh1wg7vwm7oov5fn110t&st=qag4meum&dl=0" class="btn" target="_blank">
+      Read The Derivation (PDF) <span class="btn-arrow">›</span>
+    </a>
+  </div>
+
+</main>
+
+<div class="spectrum"></div>
+
+<footer>
+  <span class="footer-copy">© 2026 Eleftheria. All rights reserved.</span>
+  <ul class="footer-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="book.html">Book</a></li>
+    <li><a href="writings.html">Writings</a></li>
+    <li><a href="/cdn-cgi/l/email-protection#d9b1bcb5b5b699bcb5bcbfadb1bcabb0b8f7bab6b4">Email</
